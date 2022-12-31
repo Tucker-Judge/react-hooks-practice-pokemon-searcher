@@ -1,33 +1,41 @@
-import React, {useState} from "react";
+import React,{useState} from "react";
 import PokemonCollection from "./PokemonCollection";
 import PokemonForm from "./PokemonForm";
 import Search from "./Search";
 import { Container } from "semantic-ui-react";
 function PokemonPage() {
-  //list of rendered
+ const [pokemons,setPokemons] = useState([])
+ const [searchTerm,setSearchTerm] = useState("")
+ 
+ const fetchingPokemon = async()=> {
+  const request = await fetch("http://localhost:3000/pokemon")
+  const res = await request.json()
+  console.log(res)
+  setPokemons(res)
+}
+useEffect(()=> {
+  fetchingPokemon()
+},[])
+
+   
+   const filteredPokemonsSearched = pokemon.filter((poke) => {
+    return pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
+   })
+
+   function addPokemons(newPoke){
+    setPokemons(pokemons, ...newPoke)
+   }
   
-  // //fetch var
-  // const fetchingData = async() => {
-  //   const req = await fetch(`https://localhost:3001/pokemon`)
-  //   const res = await req.json()
-  //   setPokemon(res)
-  //   console.log(res)
-  // }
-  // //run fetch once
-  //   useEffect(() => {
-  //   fetchingData()
-  // },[])
-  
-  
+
   return (
     <Container>
       <h1>Pokemon Searcher</h1>
       <br />
-      <PokemonForm />
+      <PokemonForm addPokemons={addPokemons}/>
       <br />
-      <Search />
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
       <br />
-      <PokemonCollection />
+      <PokemonCollection filteredPokemonsSearched={filteredPokemonsSearched}/>
     </Container>
   );
 }

@@ -22,11 +22,15 @@ can pass data to each other as well as where that information should be stored.
 ## Project Goals
 
 - Create an index displaying Pokemon 'cards'
+//fetch into useState
   - Render each Pokemon name, sprite, and hp in a card
+  //map through fetch one level down into each indiv
   - _When clicked_, the card should toggle between displaying the front and back
+  //onClick arrow function switch t/f state
     sprites
 - Allow users to search a Pokemon by its name in order to narrow down the cards
   shown on the page
+  //filter through mapped array for 
 - Wire up the form to add a missing Pokemon (Bulbasaur is missing, and you can
   probably intuit the image links to use based on the data you have). Since
   there aren't any validations, you may have to manually remove additions from
